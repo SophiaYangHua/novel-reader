@@ -37,18 +37,18 @@ const groupedByNovel = bookmarks.reduce((acc, bookmark) => {
 const groupedBookmarks = Object.values(groupedByNovel);
 ---
 
-<Layout title="My Bookmarks">
+<Layout title="我的收藏">
   <div class="page-wrapper">
     <Header />
 
     <main class="main">
       <div class="container">
         <div class="page-header">
-          <h1 class="page-title">My Bookmarks</h1>
+          <h1 class="page-title">我的收藏</h1>
           <p class="page-description">
             {groupedBookmarks.length === 0
-              ? 'You haven\'t bookmarked any chapters yet.'
-              : `${groupedBookmarks.length} novel${groupedBookmarks.length > 1 ? 's' : ''} with ${bookmarks.length} bookmarked chapter${bookmarks.length > 1 ? 's' : ''}`
+              ? '你还没有收藏任何章节。'
+              : `${groupedBookmarks.length} 部小说，共收藏 ${bookmarks.length} 章`
             }
           </p>
         </div>
@@ -61,17 +61,17 @@ const groupedBookmarks = Object.values(groupedByNovel);
                   <a href={`/novel/${group.novelId}`} class="novel-group-link">
                     {group.novelTitle}
                   </a>
-                  <span class="chapter-count">{group.chapters.length} bookmarked</span>
+                  <span class="chapter-count">已收藏 {group.chapters.length} 章</span>
                 </h2>
                 <div class="chapters-grid">
                   {group.chapters
                     .sort((a: any, b: any) => a.chapterNumber - b.chapterNumber)
                     .map(chapter => (
                     <a href={`/novel/${chapter.novelId}/${chapter.chapterId}`} class="bookmark-item">
-                      <span class="bookmark-chapter-num">Ch. {chapter.chapterNumber}</span>
+                      <span class="bookmark-chapter-num">第 {chapter.chapterNumber} 章</span>
                       <span class="bookmark-chapter-title">{chapter.chapterTitle}</span>
                       <span class="bookmark-date">
-                        {new Date(chapter.timestamp).toLocaleDateString('en-US', {
+                        {new Date(chapter.timestamp).toLocaleDateString('zh-CN', {
                           month: 'short',
                           day: 'numeric',
                           year: 'numeric'
@@ -88,9 +88,9 @@ const groupedBookmarks = Object.values(groupedByNovel);
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
               <path d="M19 21l-7-5-7 5-7 7 5 7-5v13z"></path>
             </svg>
-            <h3>No bookmarks yet</h3>
-            <p>Bookmark your favorite chapters to find them easily later.</p>
-            <a href="/" class="btn btn-primary">Browse Novels</a>
+            <h3>还没有收藏</h3>
+            <p>收藏喜欢的章节，之后就能快速找到它们。</p>
+            <a href="/" class="btn btn-primary">去逛逛</a>
           </div>
         )}
       </div>

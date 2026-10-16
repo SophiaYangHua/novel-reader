@@ -59,14 +59,14 @@ const novelProgress = { chapterId, scrollPosition: 0 };
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-          <span class="back-text">Back to Novel</span>
+          <span class="back-text">返回书籍</span>
         </a>
         <div class="reader-title">
           <a href={`/novel/${novel.id}`} class="novel-link">{novel.title}</a>
           <span class="chapter-info">{chapter.title}</span>
         </div>
         <div class="reader-actions">
-          <button class="action-btn bookmark-btn" id="bookmark-btn" title="Bookmark this chapter" data-bookmarked="false">
+          <button class="action-btn bookmark-btn" id="bookmark-btn" title="收藏本章" data-bookmarked="false">
             <svg class="bookmark-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M19 21l-7-5-7 5-7 7 5 7-5v13z"></path>
             </svg>
@@ -74,13 +74,13 @@ const novelProgress = { chapterId, scrollPosition: 0 };
               <path d="M19 21l-7-5-7 5V5H5V7l7-5 7 5v13z"></path>
             </svg>
           </button>
-          <button class="action-btn" id="settings-btn" title="Settings">
+          <button class="action-btn" id="settings-btn" title="设置">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="3"></circle>
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
             </svg>
           </button>
-          <button class="action-btn" id="theme-toggle-btn" title="Toggle Theme">
+          <button class="action-btn" id="theme-toggle-btn" title="切换主题">
             <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -121,14 +121,14 @@ const novelProgress = { chapterId, scrollPosition: 0 };
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>Previous</span>
+            <span>上一章</span>
           </a>
         ) : (
           <span class="nav-btn disabled">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            <span>Previous</span>
+            <span>上一章</span>
           </span>
         )}
 
@@ -136,7 +136,7 @@ const novelProgress = { chapterId, scrollPosition: 0 };
           <select id="chapter-select" class="chapter-select">
             {novel.chapters.map(ch => (
               <option value={ch.id} selected={ch.id === chapterId}>
-                Chapter {ch.number}: {ch.title}
+                第 {ch.number} 章：{ch.title}
               </option>
             ))}
           </select>
@@ -144,14 +144,14 @@ const novelProgress = { chapterId, scrollPosition: 0 };
 
         {nextChapter ? (
           <a href={`/novel/${novel.id}/${nextChapter.id}`} class="nav-btn next">
-            <span>Next</span>
+            <span>下一章</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </a>
         ) : (
           <span class="nav-btn disabled">
-            <span>Next</span>
+            <span>下一章</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -164,7 +164,7 @@ const novelProgress = { chapterId, scrollPosition: 0 };
     <div class="settings-panel" id="settings-panel">
       <div class="settings-content">
         <div class="settings-header">
-          <h3>Reader Settings</h3>
+          <h3>阅读设置</h3>
           <button class="close-btn" id="close-settings">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -174,7 +174,7 @@ const novelProgress = { chapterId, scrollPosition: 0 };
         </div>
         
         <div class="settings-group">
-          <label>Font Size</label>
+          <label>字号</label>
           <div class="font-size-controls">
             <button class="font-btn" id="font-decrease">A-</button>
             <span id="font-size-display">18px</span>
@@ -183,7 +183,7 @@ const novelProgress = { chapterId, scrollPosition: 0 };
         </div>
 
         <div class="settings-group">
-          <label>Line Height</label>
+          <label>行高</label>
           <div class="line-height-slider">
             <input type="range" min="1.4" max="2.2" step="0.1" value="1.8" id="line-height-slider" />
           </div>

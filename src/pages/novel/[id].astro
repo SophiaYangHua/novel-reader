@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { novels, getNovelById } from '../../data/novels';
+import { genreLabel } from '../../data/genres';
 
 export function getStaticPaths() {
   return novels.map(novel => ({
@@ -22,7 +23,7 @@ const relatedNovels = novels
   .slice(0, 6);
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('id-ID', {
+  return new Date(dateStr).toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -64,12 +65,12 @@ function formatViews(views: number): string {
             <div class="novel-info">
               <div class="novel-badges">
                 {novel.status === 'Completed' ? (
-                  <span class="badge badge-success">Completed</span>
+                  <span class="badge badge-success">已完结</span>
                 ) : (
-                  <span class="badge">Ongoing</span>
+                  <span class="badge">连载中</span>
                 )}
                 {novel.genres.slice(0, 2).map(genre => (
-                  <span class="badge badge-secondary">{genre}</span>
+                  <span class="badge badge-secondary">{genreLabel(genre)}</span>
                 ))}
               </div>
               
@@ -89,7 +90,7 @@ function formatViews(views: number): string {
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                   </svg>
                   <span class="stat-value">{novel.rating}</span>
-                  <span class="stat-label">Rating</span>
+                  <span class="stat-label">评分</span>
                 </div>
                 <div class="stat">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -97,7 +98,7 @@ function formatViews(views: number): string {
                     <circle cx="12" cy="12" r="3"></circle>
                   </svg>
                   <span class="stat-value">{formatViews(novel.views)}</span>
-                  <span class="stat-label">Views</span>
+                  <span class="stat-label">人气</span>
                 </div>
                 <div class="stat">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,15 +106,15 @@ function formatViews(views: number): string {
                     <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z"></path>
                   </svg>
                   <span class="stat-value">{novel.chapters.length}</span>
-                  <span class="stat-label">Chapters</span>
+                  <span class="stat-label">章节</span>
                 </div>
               </div>
 
               <p class="novel-description">{novel.description}</p>
 
               <div class="novel-meta">
-                <span>Started: {formatDate(novel.createdAt)}</span>
-                <span>Updated: {formatDate(novel.updatedAt)}</span>
+                <span>首发：{formatDate(novel.createdAt)}</span>
+                <span>更新：{formatDate(novel.updatedAt)}</span>
               </div>
 
               <div class="novel-actions">
@@ -123,20 +124,20 @@ function formatViews(views: number): string {
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                       </svg>
-                      Start Reading
+                      开始阅读
                     </a>
                     <a href={`/novel/${novel.id}/${novel.chapters[novel.chapters.length - 1].id}`} class="btn btn-outline btn-lg">
-                      Latest Chapter
+                      最新章节
                     </a>
                   </>
                 ) : (
-                  <span class="badge badge-warning">No chapters available</span>
+                  <span class="badge badge-warning">暂无章节</span>
                 )}
               </div>
 
               <div class="novel-genres">
                 {novel.genres.map(genre => (
-                  <a href={`/genre/${genre.toLowerCase()}`} class="genre-link">{genre}</a>
+                  <a href={`/genre/${genre.toLowerCase()}`} class="genre-link">{genreLabel(genre)}</a>
                 ))}
               </div>
             </div>
@@ -148,11 +149,11 @@ function formatViews(views: number): string {
       <section class="chapters-section">
         <div class="container">
           <div class="chapters-header">
-            <h2 class="section-title">Chapters</h2>
+            <h2 class="section-title">章节目录</h2>
             <div class="chapter-filter">
               <select id="chapter-sort" class="input">
-                <option value="desc">Newest First</option>
-                <option value="asc">Oldest First</option>
+                <option value="desc">最新优先</option>
+                <option value="asc">最早优先</option>
               </select>
             </div>
           </div>
@@ -160,7 +161,7 @@ function formatViews(views: number): string {
           <div class="chapters-list" id="chapters-list">
             {novel.chapters.slice(-100).reverse().map((chapter) => (
               <a href={`/novel/${novel.id}/${chapter.id}`} class="chapter-item">
-                <span class="chapter-number">Ch. {chapter.number}</span>
+                <span class="chapter-number">第 {chapter.number} 章</span>
                 <span class="chapter-title">{chapter.title}</span>
                 <span class="chapter-date">{formatDate(chapter.createdAt)}</span>
               </a>
@@ -170,7 +171,7 @@ function formatViews(views: number): string {
           {novel.chapters.length > 100 && (
             <div class="load-more">
               <button class="btn btn-secondary" id="load-more-btn">
-                Load More Chapters
+                加载更多章节
               </button>
             </div>
           )}
@@ -181,7 +182,7 @@ function formatViews(views: number): string {
       {relatedNovels.length > 0 && (
         <section class="related-section">
           <div class="container">
-            <h2 class="section-title">You Might Also Like</h2>
+            <h2 class="section-title">同类推荐</h2>
             <div class="related-grid">
               {relatedNovels.map(n => (
                 <a href={`/novel/${n.id}`} class="related-item">
@@ -204,7 +205,7 @@ function formatViews(views: number): string {
                         </svg>
                         {n.rating}
                       </span>
-                      <span>{n.chapters.length} Ch</span>
+                      <span>{n.chapters.length} 章</span>
                     </div>
                   </div>
                 </a>
@@ -529,7 +530,7 @@ function formatViews(views: number): string {
   }));
 
   function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString('id-ID', {
+    return new Date(dateStr).toLocaleDateString('zh-CN', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -541,7 +542,7 @@ function formatViews(views: number): string {
     if (!chaptersList) return;
     chaptersList.innerHTML = chaptersToRender.map(ch => `
       <a href="${ch.url}" class="chapter-item" style="animation: fadeIn 0.3s ease">
-        <span class="chapter-number">Ch. ${ch.number}</span>
+        <span class="chapter-number">第 ${ch.number} 章</span>
         <span class="chapter-title">${ch.title}</span>
         <span class="chapter-date">${formatDate(ch.createdAt)}</span>
       </a>

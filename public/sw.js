@@ -252,7 +252,7 @@ async function getOfflineFallback() {
     `<!DOCTYPE html>
     <html>
     <head>
-      <title>Offline - NovelReader</title>
+      <title>离线 - 小说书城</title>
       <style>
         body {
           font-family: sans-serif;
@@ -276,9 +276,9 @@ async function getOfflineFallback() {
     </head>
     <body>
       <div class="message">
-        <h1>You're Offline</h1>
-        <p>Check your connection and try again.</p>
-        <p><a href="/">Go Home</a></p>
+        <h1>当前离线</h1>
+        <p>请检查网络连接后重试。</p>
+        <p><a href="/">返回首页</a></p>
       </div>
     </body>
     </html>`,
@@ -309,8 +309,8 @@ self.addEventListener('sync', (event) => {
  */
 self.addEventListener('push', (event) => {
   const options = event.data?.json() || {
-    title: 'NovelReader',
-    body: 'New chapters available!',
+    title: '小说书城',
+    body: '有新章节更新啦！',
     icon: '/icon-192.svg',
     badge: '/icon-192.svg',
     tag: 'new-chapters',

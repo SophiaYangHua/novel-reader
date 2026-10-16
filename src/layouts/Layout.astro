@@ -11,21 +11,21 @@ interface Props {
 
 const {
   title,
-  description = import.meta.env.PUBLIC_SITE_DESCRIPTION || "Read your favorite novels online for free",
+  description = import.meta.env.PUBLIC_SITE_DESCRIPTION || "免费在线小说阅读，海量小说随时随地畅读",
   image = '/og-image.png',
   type = 'website',
-  keywords = ['novel', 'reading', 'free novels', 'online reader']
+  keywords = ['小说', '在线阅读', '免费小说', '小说阅读']
 } = Astro.props;
 
 const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://novel-reader.pages.dev';
-const siteName = import.meta.env.PUBLIC_SITE_NAME || 'NovelReader';
+const siteName = import.meta.env.PUBLIC_SITE_NAME || '小说书城';
 const fullTitle = `${title} | ${siteName}`;
 const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,7 @@ const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
   <meta property="og:description" content={description}>
   <meta property="og:image" content={fullImage}>
   <meta property="og:site_name" content={siteName}>
-  <meta property="og:locale" content="id_ID">
+  <meta property="og:locale" content="zh_CN">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">

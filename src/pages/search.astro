@@ -4,26 +4,27 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import NovelCard from '../components/NovelCard.astro';
 import { searchNovels, getAllGenres } from '../data/novels';
+import { genreLabel } from '../data/genres';
 
 const query = Astro.url.searchParams.get('q') || '';
 const results = query ? searchNovels(query) : [];
 const genres = getAllGenres();
 ---
 
-<Layout title={query ? `Search: ${query}` : 'Search Novels'}>
+<Layout title={query ? `搜索：${query}` : '搜索小说'}>
   <div class="page-wrapper">
     <Header />
     
     <main class="main">
       <section class="search-header">
         <div class="container">
-          <h1 class="page-title">Search Novels</h1>
+          <h1 class="page-title">搜索小说</h1>
           <form action="/search" method="get" class="search-form-large">
             <input
               type="text"
               name="q"
               value={query}
-              placeholder="Search by title, author, or genre... (live search enabled)"
+              placeholder="按书名、作者或分类搜索..."
               class="search-input-large"
               autocomplete="off"
             />
@@ -32,7 +33,7 @@ const genres = getAllGenres();
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="m21 21-4.35-4.35"></path>
               </svg>
-              Search
+              搜索
             </button>
           </form>
           <div id="keyboard-shortcuts" class="keyboard-shortcuts"></div>
@@ -50,8 +51,8 @@ const genres = getAllGenres();
             <div class="results-header">
               <h2 class="results-title">
                 {results.length > 0 
-                  ? `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}"`
-                  : `No results found for "${query}"`
+                  ? `找到 ${results.length} 部与“${query}”相关的小说`
+                  : `没有找到与“${query}”相关的小说`
                 }
               </h2>
             </div>
@@ -68,7 +69,7 @@ const genres = getAllGenres();
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <p>Try searching with different keywords</p>
+                <p>换个关键词再试试吧</p>
               </div>
             )}
           </div>
@@ -78,14 +79,14 @@ const genres = getAllGenres();
       {!query && (
         <section class="browse-section">
           <div class="container">
-            <h2 class="section-title">Browse by Genre</h2>
+            <h2 class="section-title">按分类浏览</h2>
             <div class="genres-grid">
               {genres.map(genre => (
                 <a href={`/genre/${genre.toLowerCase()}`} class="genre-card">
-                  <span class="genre-name">{genre}</span>
+                  <span class="genre-name">{genreLabel(genre)}</span>
                   <span class="genre-count">{
                     Math.floor(Math.random() * 50) + 10
-                  } novels</span>
+                  } 部小说</span>
                 </a>
               ))}
             </div>

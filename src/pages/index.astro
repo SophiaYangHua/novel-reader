@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import NovelCard from '../components/NovelCard.astro';
 import { getLatestUpdates, getPopularNovels, getTopRatedNovels, novels } from '../data/novels';
+import { genreLabel } from '../data/genres';
 
 const latestUpdates = getLatestUpdates(12);
 const popularNovels = getPopularNovels(6);
@@ -11,7 +12,7 @@ const topRated = getTopRatedNovels(6);
 const featuredNovel = novels[0]; // First novel as featured
 ---
 
-<Layout title="Home">
+<Layout title="首页">
   <div class="page-wrapper">
     <Header />
     
@@ -21,23 +22,22 @@ const featuredNovel = novels[0]; // First novel as featured
         <div class="hero-content">
           <div class="hero-text">
             <h1 class="hero-title">
-              Read Your Favorite Novels<br />
-              <span class="hero-highlight">Anytime, Anywhere</span>
+              随时随地<br />
+              <span class="hero-highlight">畅读你喜欢的小说</span>
             </h1>
             <p class="hero-description">
-              Discover thousands of novels from various genres. From fantasy to romance, from action to slice of life.
-              All free and updated daily.
+              汇聚各类题材的海量小说，从奇幻到言情，从热血到日常，全部免费阅读、每日更新。
             </p>
             <div class="hero-actions">
               <a href="/popular" class="btn btn-primary btn-lg">
-                Start Reading
+                开始阅读
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
               </a>
               <a href="/latest" class="btn btn-outline btn-lg">
-                Latest Updates
+                最新更新
               </a>
             </div>
           </div>
@@ -53,9 +53,9 @@ const featuredNovel = novels[0]; // First novel as featured
                 class="featured-cover"
               />
               <div class="featured-info">
-                <span class="featured-label">Featured Novel</span>
+                <span class="featured-label">精选小说</span>
                 <h2 class="featured-title">{featuredNovel.title}</h2>
-                <p class="featured-author">by {featuredNovel.author}</p>
+                <p class="featured-author">作者：{featuredNovel.author}</p>
                 <p class="featured-description">{featuredNovel.description}</p>
                 <div class="featured-meta">
                   <span class="featured-rating">
@@ -65,7 +65,7 @@ const featuredNovel = novels[0]; // First novel as featured
                     {featuredNovel.rating}
                   </span>
                   <span class="featured-genres">
-                    {featuredNovel.genres.slice(0, 3).join(' • ')}
+                    {featuredNovel.genres.slice(0, 3).map(genreLabel).join(' • ')}
                   </span>
                 </div>
               </div>
@@ -78,9 +78,9 @@ const featuredNovel = novels[0]; // First novel as featured
       <section class="section">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Latest Updates</h2>
+            <h2 class="section-title">最新更新</h2>
             <a href="/latest" class="view-all">
-              View All
+              查看全部
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -98,9 +98,9 @@ const featuredNovel = novels[0]; // First novel as featured
       <section class="section section-alt">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Most Popular</h2>
+            <h2 class="section-title">热门推荐</h2>
             <a href="/popular" class="view-all">
-              View All
+              查看全部
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -129,7 +129,7 @@ const featuredNovel = novels[0]; // First novel as featured
                       </svg>
                       {novel.rating}
                     </span>
-                    <span class="popular-chapters">{novel.chapters.length} Chapters</span>
+                    <span class="popular-chapters">{novel.chapters.length} 章</span>
                   </div>
                 </div>
               </a>
@@ -142,9 +142,9 @@ const featuredNovel = novels[0]; // First novel as featured
       <section class="section">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Top Rated</h2>
+            <h2 class="section-title">高分推荐</h2>
             <a href="/popular" class="view-all">
-              View All
+              查看全部
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -164,19 +164,19 @@ const featuredNovel = novels[0]; // First novel as featured
           <div class="stats-grid">
             <div class="stat-item">
               <span class="stat-number">{novels.length}+</span>
-              <span class="stat-label">Novels</span>
+              <span class="stat-label">小说</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">{novels.reduce((acc, n) => acc + n.chapters.length, 0)}+</span>
-              <span class="stat-label">Chapters</span>
+              <span class="stat-label">章节</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">15+</span>
-              <span class="stat-label">Genres</span>
+              <span class="stat-label">分类</span>
             </div>
             <div class="stat-item">
               <span class="stat-number">24/7</span>
-              <span class="stat-label">Updates</span>
+              <span class="stat-label">更新</span>
             </div>
           </div>
         </div>

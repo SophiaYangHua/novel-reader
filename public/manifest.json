@@ -1,7 +1,7 @@
 {
-  "name": "NovelReader - Read Free Novels Online",
-  "short_name": "NovelReader",
-  "description": "Read your favorite novels online for free. Access thousands of novels with offline reading support.",
+  "name": "小说书城 - 免费在线阅读",
+  "short_name": "小说书城",
+  "description": "免费在线阅读小说，支持离线阅读，海量小说随心畅读。",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -32,30 +32,30 @@
   "categories": ["books", "education", "entertainment", "lifestyle"],
   "shortcuts": [
     {
-      "name": "Latest Novels",
-      "short_name": "Latest",
-      "description": "View latest novel updates",
+      "name": "最新更新",
+      "short_name": "最新",
+      "description": "查看最新更新的小说",
       "url": "/latest",
       "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
     },
     {
-      "name": "Popular Novels",
-      "short_name": "Popular",
-      "description": "View most popular novels",
+      "name": "热门小说",
+      "short_name": "热门",
+      "description": "查看最受欢迎的小说",
       "url": "/popular",
       "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
     },
     {
-      "name": "My Bookmarks",
-      "short_name": "Bookmarks",
-      "description": "View bookmarked chapters",
+      "name": "我的收藏",
+      "short_name": "收藏",
+      "description": "查看已收藏的章节",
       "url": "/bookmarks",
       "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
     },
     {
-      "name": "Search",
-      "short_name": "Search",
-      "description": "Search for novels",
+      "name": "搜索小说",
+      "short_name": "搜索",
+      "description": "搜索想看的小说",
       "url": "/search",
       "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
     }
@@ -66,14 +66,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "NovelReader home screen showing latest novels"
+      "label": "小说书城首页，展示最新小说"
     },
     {
       "src": "/screenshot-narrow.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "NovelReader mobile view"
+      "label": "小说书城移动端阅读界面"
     }
   ]
 }
